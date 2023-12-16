@@ -1,0 +1,1394 @@
+//Category row 
+
+ // ignore_for_file: non_constant_identifier_names, file_names, unused_local_variable, duplicate_ignore
+// // ignore_for_file: non_constant_identifier_names, file_names
+
+// import 'package:flutter/material.dart';
+// import 'package:platform_myhrakii/core/colors.dart';
+
+// List<Map<String, String>> Category = [
+//   {
+//     'imagePath': 'assets/images/tablelamp.jpg',
+//     'categoryName': 'Home & \nLiving'
+//   },
+//   {
+//     'imagePath': 'assets/images/womendesign.png',
+//     'categoryName': "Women's & \n Clothing"
+//   },
+//   {
+//     'imagePath': 'assets/images/mens.jpg',
+//     'categoryName': "Men's & \n Clothing"
+//   },
+//   {
+//     'imagePath': 'assets/images/bagsandfootwears.jpg',
+//     'categoryName': 'Bags & \n Footwear'
+//   },
+// ];
+
+// class CategoriesRow extends StatelessWidget {
+//   const CategoriesRow({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+
+//     return Container(
+//       margin: const EdgeInsets.only(top: 7),
+//       width: size.width,
+//       height: size.height * 0.14,
+//       child: ListView.builder(
+//         scrollDirection: Axis.horizontal,
+//         physics: const BouncingScrollPhysics(),
+//         itemCount: Category.length,
+//         itemBuilder: (context, index) {
+//           return Padding(
+//             padding: const EdgeInsets.all(10.0),
+//             child: Column(
+//               children: [
+//                 CircleAvatar(
+//                   radius: 42,
+//                   backgroundImage: AssetImage(Category[index]['imagePath']!),
+//                 ),
+//                 SizedBox(
+//                   height: size.height * 0.008,
+//                 ),
+//                 Flexible(
+//                   child: Text(
+//                     Category[index]['categoryName']!,
+//                     style: const TextStyle(
+//                       fontWeight: FontWeight.w500,
+//                       fontSize: 12,
+//                       color: primary,
+//                     ),
+//                     textAlign: TextAlign.center,
+//                     overflow: TextOverflow.visible,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+
+/ integration part
+
+// ignore_for_file: library_private_types_in_public_api
+
+// import 'dart:convert';
+
+// import 'package:flutter/material.dart';
+// import 'package:http/http.dart' as http;
+// import 'package:platform_myhrakii/core/colors.dart';
+// import 'package:platform_myhrakii/src/model/homescreen_model.dart';
+
+
+// class CategoryListScreen extends StatefulWidget {
+//   const CategoryListScreen({super.key});
+
+//   @override
+//   _CategoryListScreenState createState() => _CategoryListScreenState();
+// }
+
+// class _CategoryListScreenState extends State<CategoryListScreen> {
+//   late List<HomeCategroyModel> categoryList;
+
+//  @override
+//   void initState() {
+//     super.initState();
+//     fetchData();
+//     categoryList = []; // or fetch data from an API
+//   }
+
+// Future<void> fetchData() async {
+//   try {
+//     final response = await http.get(Uri.parse('https://dev-api.myhraki.com/web/productgen/api/v1/category/All'));
+//     if (response.statusCode == 200) {
+//       final List<dynamic> data = json.decode(response.body);
+
+//       if (data is List) {
+//         setState(() {
+//           categoryList = data.map((item) => HomeCategroyModel.fromJson(item)).toList();
+//         });
+//       } else {
+//         throw Exception('Invalid API response format - not a list');
+//       }
+//     } else {
+//       throw Exception('Failed to load data');
+//     }
+//   } catch (error) {
+//     print('Error: $error');
+//   }
+// }
+
+//category function
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: Text('Category List'),
+//       ),
+//       body: categoryList == null
+//           ? Center(child: CircularProgressIndicator())
+//           : ListView.builder(
+//               itemCount: categoryList.length,
+//               itemBuilder: (context, index) {
+//                 final category = categoryList[index];
+//                 var size=MediaQuery.of(context).size;
+//                 return 
+//                   Padding(
+//             padding: const EdgeInsets.all(10.0),
+//             child: Column(
+//               children: [
+//                 CircleAvatar(
+//                   radius: 42,
+//                   backgroundImage: AssetImage((category.blobImageURL),),
+//                 ),
+//                 SizedBox(
+//                   height: size.height * 0.008,
+//                 ),
+//                 Flexible(
+//                   child: Text(
+//                     (category.categoryName),
+//                     style: const TextStyle(
+//                       fontWeight: FontWeight.w500,
+//                       fontSize: 12,
+//                       color: primary,
+//                     ),
+//                     textAlign: TextAlign.center,
+//                     overflow: TextOverflow.visible,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//     }  )
+  
+//     );
+//               }
+            
+    
+//   }
+
+
+
+//CraftWidget
+
+
+// import 'package:flutter/material.dart';
+// import '../../../../core/colors.dart';
+
+// class CraftWidget extends StatelessWidget {
+//   CraftWidget({
+//     Key? key,
+//     required this.size,
+//   }) : super(key: key);
+
+//   final Size size;
+
+//   final List<Map<String, String>> assetImages = [
+//     {
+//       'assetImages': 'assets/images/Rectangle 162262.png',
+//       'craftText': 'BLOCK PRINTED\nSCARFS',
+//       'subText': 'Block printing is the\nprocess of printing ....'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162261.png',
+//       'craftText': 'MIRROR WORK',
+//       'subText': 'Mirror-work,is a\ntype of embroidery which...'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162261 (1).png',
+//       'craftText': 'KOLHAPURI\nCHAPPALS',
+//       'subText': 'Kolhapuri chappals are \nIndian decorati...'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162262.png',
+//       'craftText': 'BLOCK PRINTED\nSCARFS',
+//       'subText': 'Block printing is the\nprocess of printing ....'
+//     }
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//         // height: size.height * 0.5,
+//         height: size.height * 0.68,
+//         width: size.width,
+//         color: light,
+//         child: Column(
+//           children: [
+//             SizedBox(height: size.height * 0.03),
+//             const Text(
+//               'TALE OF CRAFT',
+//               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+//             ),
+//             Expanded(
+//                 child: GridView.builder(
+//                     physics: const NeverScrollableScrollPhysics(),
+//                     gridDelegate:
+//                         const SliverGridDelegateWithFixedCrossAxisCount(
+//                       crossAxisCount: 2,
+//                       crossAxisSpacing: 0,
+//                       mainAxisSpacing: 7,
+//                     ),
+//                     itemCount: 4,
+//                     itemBuilder: (context, index) {
+//                       return Container(
+//                         alignment: Alignment.centerLeft,
+//                         height: size.height,
+//                         decoration: BoxDecoration(
+//                             borderRadius: BorderRadius.circular(10),
+//                             image: DecorationImage(
+//                                 image: AssetImage(
+//                                     assetImages[index]['assetImages']!))),
+//                         child: Padding(
+//                           padding: EdgeInsets.only(
+//                               left: size.width * 0.07, top: size.height * 0.09),
+//                           child: Column(
+//                             // crossAxisAlignment: CrossAxisAlignment.start,
+//                             mainAxisAlignment: MainAxisAlignment.center,
+//                             children: [
+//                               Text(
+//                                 assetImages[index]['craftText']!,
+//                                 style: const TextStyle(
+//                                     color: white,
+//                                     fontSize: 14,
+//                                     fontWeight: FontWeight.w600),
+//                               ),
+//                               SizedBox(height: size.height * 0.01),
+//                               Text(
+//                                 assetImages[index]['subText']!,
+//                                 style: const TextStyle(
+//                                     color: white,
+//                                     fontSize: 12,
+//                                     fontWeight: FontWeight.w400),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       );
+//                     })),
+//             Container(
+//               height: size.height * 0.003,
+//               width: size.width * 0.3,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(10),
+//                   gradient: const LinearGradient(
+//                       colors: [primary, grey, grey, grey, grey],
+//                       begin: Alignment.centerLeft,
+//                       end: Alignment.centerRight),
+//                   color: primary),
+//             ),
+//             SizedBox(height: size.height * 0.02),
+//             TextButton(
+//                 onPressed: () {},
+//                 child: const Text(
+//                   'VIEW ALL',
+//                   style: TextStyle(
+//                       color: primary,
+//                       fontSize: 16,
+//                       fontWeight: FontWeight.w600,
+//                       decoration: TextDecoration.underline,
+//                 decorationColor: primaryy,
+//                 decorationThickness: 1,),
+//                 )),
+//           ],
+//         ));
+//   }
+// }
+
+
+// ShopByCategoryWidget
+
+// // ignore_for_file: must_be_immutable
+// import 'package:flutter/material.dart';
+// import 'dart:ui' as ui;
+// import 'package:palette_generator/palette_generator.dart';
+
+// class ShopByCategoryWidget extends StatelessWidget {
+//   ShopByCategoryWidget({
+//     Key? key,
+//     required this.size,
+//   }) : super(key: key);
+
+//   final Size size;
+
+//   List<Map<String, String>> shopCategory = [
+//     {'shopbyImage': 'assets/images/homedeco.jpg', 'shopbyText': 'HOME DECOR'},
+//     {
+//       'shopbyImage': 'assets/images/organicproducts.jpeg',
+//       'shopbyText': 'ORGANIC BEAUTY'
+//     },
+//     {'shopbyImage': 'assets/images/nytsuite.jpeg', 'shopbyText': 'NIGHT SUITS'},
+//     {'shopbyImage': 'assets/images/kitchenitems.jpg', 'shopbyText': 'KITCHEN'},
+//     {'shopbyImage': 'assets/images/jewellery.jpg', 'shopbyText': 'JEWELLERY'},
+//     {'shopbyImage': 'assets/images/bedding.jpg', 'shopbyText': 'BEDDING'},
+//   ];
+
+//   Future<Color> getDominantColor(String imagePath) async {
+//     final PaletteGenerator paletteGenerator =
+//         await PaletteGenerator.fromImageProvider(
+//       AssetImage(imagePath),
+//       size: const Size(100, 100),
+//     );
+
+//     return paletteGenerator.dominantColor!.color;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: size.height * 0.73,
+//       width: size.width,
+//       child: GridView.builder(
+//         shrinkWrap: true,
+//         physics: const NeverScrollableScrollPhysics(),
+//         itemCount: 6,
+//         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//           crossAxisCount: 2,
+//           crossAxisSpacing: 0,
+//           mainAxisSpacing: 1,
+//         ),
+//         itemBuilder: (context, index) {
+//           return FutureBuilder<Color>(
+//             future: getDominantColor(shopCategory[index]['shopbyImage']!),
+//             builder: (context, snapshot) {
+//               if (snapshot.connectionState == ConnectionState.done) {
+//                 Color blurColor = snapshot.data!;
+//                 return Column(
+//                   mainAxisAlignment: MainAxisAlignment.center,
+//                   children: [
+//                     Container(
+//                       height: size.height * 0.22,
+//                       width: size.width * 0.45,
+//                       decoration: BoxDecoration(
+//                         borderRadius: BorderRadius.circular(10),
+//                         image: DecorationImage(
+//                           image:
+//                               AssetImage(shopCategory[index]['shopbyImage']!),
+//                           fit: BoxFit.cover,
+//                         ),
+//                       ),
+//                       child: Stack(
+//                         alignment: Alignment.bottomCenter,
+//                         children: [
+//                           ClipRRect(
+//                             borderRadius: const BorderRadius.only(
+//                               bottomLeft: Radius.circular(10),
+//                               bottomRight: Radius.circular(10),
+//                             ),
+//                             child: BackdropFilter(
+//                               filter: ui.ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+//                               child: Container(
+//                                 height: size.height * 0.05,
+//                                 width: size.width,
+//                                 padding: const EdgeInsets.all(8),
+//                                 color: blurColor.withOpacity(0.3),
+//                                 child: Column(
+//                                   mainAxisAlignment: MainAxisAlignment.end,
+//                                   children: [
+//                                     Text(
+//                                       shopCategory[index]['shopbyText']!,
+//                                       style: const TextStyle(
+//                                         color: Colors.white,
+//                                         fontSize: 12,
+//                                         fontWeight: FontWeight.w600,
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ),
+//                             ),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 );
+//               } else {
+//                 return Container();
+//               }
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+
+//PopularIdeasScreen
+
+
+// // ignore_for_file: must_be_immutable
+
+// import 'package:flutter/material.dart';
+// import '../../../../core/colors.dart';
+
+// class PopularIdeasScreen extends StatelessWidget {
+//   PopularIdeasScreen({
+//     super.key,
+//     required this.size,
+//   });
+
+//   final Size size;
+//   List <Map<String , String>>popularItems = [
+//     {'popularImage':'assets/images/jutiwomen.jpg','populatText':'Footwear'},
+//    { 'popularImage':'assets/images/womenbag.jpg','populatText':'Bags'}
+//   ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: size.height * 0.25,
+//       width: size.width,
+//       // color: green,
+//       child: ListView.builder(
+//         itemCount: 2,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (context, index) {
+//           return Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: Column(
+//               crossAxisAlignment: CrossAxisAlignment.start,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Container(
+//                   height: size.height * 0.2,
+//                   width: size.width * 0.54,
+//                   decoration: BoxDecoration(
+//                       color: viewall, borderRadius: BorderRadius.circular(10)),
+//                   child: Column(
+//                     children: [
+//                       SizedBox(height: size.height * 0.01),
+//                       Container(
+//                         height: size.height * 0.13,
+//                         width: size.width * 0.5,
+//                         decoration: BoxDecoration(
+//                             // color: pink,
+//                             borderRadius: BorderRadius.circular(10),
+//                             image: DecorationImage(
+//                                 image: AssetImage(popularItems[index]['popularImage']!),
+//                                 fit: BoxFit.cover)),
+//                       ),
+//                        Text(
+//                        popularItems[index]['populatText']!,
+//                         style: const TextStyle(
+//                             fontWeight: FontWeight.w500, fontSize: 16),
+//                       ),
+//                       const Text(
+//                         'Gifted By 50 people',
+//                         style:
+//                             TextStyle(color: grey, fontWeight: FontWeight.w400),
+//                       ),
+//                     ],
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+//FootwearRow
+
+
+// import 'package:flutter/material.dart';
+// import 'package:platform_myhrakii/core/colors.dart';
+
+// class FootwearRow extends StatelessWidget {
+//   const FootwearRow({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+//     return SizedBox(
+//       height: size.height * 0.43,
+//       width: size.width,
+//       child: ListView.builder(
+//         scrollDirection: Axis.horizontal,
+//         itemCount: 1,
+//         itemBuilder: (context, index) {
+//           return Row(
+//             children: [
+//               IconButton(
+//                   onPressed: () {},
+//                   icon: const Icon(
+//                     Icons.arrow_back_ios_new_rounded,
+//                     size: 16,
+//                   )),
+//               JootiesWidget(size: size),
+//               SizedBox(width: size.width * 0.04),
+//               JootiesWidget(size: size),
+//               IconButton(
+//                   onPressed: () {},
+//                   icon: const Icon(
+//                     Icons.arrow_forward_ios_rounded,
+//                     size: 16,
+//                   )),
+//             ],
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// class JootiesWidget extends StatelessWidget {
+//   const JootiesWidget({
+//     super.key,
+//     required this.size,
+//   });
+
+//   final Size size;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Column(
+//       children: [
+//         Container(
+//             height: size.height * 0.43,
+//             width: size.width * 0.41,
+//             decoration: BoxDecoration(
+//                 color: lightgrey, borderRadius: BorderRadius.circular(8)),
+//             child: Column(
+//               children: [
+//                 SizedBox(height: size.height * 0.013),
+//                 Stack(
+//                   alignment: Alignment.topCenter,
+//                   children: [
+//                     Container(
+//                       height: size.height * 0.23,
+//                       width: size.width * 0.37,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(8),
+//                           image: const DecorationImage(
+//                               image: AssetImage('assets/images/jootiewomen.jpg'),
+//                               fit: BoxFit.cover)),
+//                     ),
+//                     Positioned(
+//                       right: 2,
+//                       child: IconButton(
+//                           onPressed: () {},
+//                           icon: const Icon(
+//                             Icons.favorite_rounded,
+//                             color: primary,
+//                           )),
+//                     ),
+//                     Positioned(
+//                       right: 1,
+//                       bottom: 3,
+//                       child: Row(
+//                         children: [
+//                           IconButton(
+//                               onPressed: () {},
+//                               icon: const Icon(
+//                                 Icons.star,
+//                                 size: 16,
+//                                 color: green,
+//                               )),
+//                           const Text(
+//                             '4.4 (20)',
+//                             style: TextStyle(color: grey),
+//                           ),
+//                         ],
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//                 Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     const Text('Jooties',
+//                         style: TextStyle(
+//                             fontSize: 18, fontWeight: FontWeight.w500)),
+//                     const Text(
+//                       'By Creative Footwear',
+//                       style: TextStyle(color: lettercolor, fontSize: 12),
+//                     ),
+//                     const Text('₹900',
+//                         style: TextStyle(
+//                           fontSize: 16,
+//                           fontWeight: FontWeight.w500,
+//                           color: Color(0xFF000000),
+//                         )),
+//                     SizedBox(height: size.height * 0.01),
+//                     const Text("2 products in stock",
+//                         style: TextStyle(
+//                           fontSize: 12,
+//                           fontWeight: FontWeight.w300,
+//                           fontStyle: FontStyle.italic,
+//                           color: Color(0xFF868686),
+//                         )),
+//                   ],
+//                 ),
+//                 SizedBox(height: size.height * 0.02),
+//                 Container(
+//                     height: size.height * 0.034,
+//                     width: size.width * 0.32,
+//                     decoration: BoxDecoration(
+//                       borderRadius: BorderRadius.circular(10),
+//                       gradient:
+//                           const LinearGradient(colors: [primary, primaryy]),
+//                       color: primary,
+//                     ),
+//                     child: InkWell(
+//                       onTap: () async {},
+//                       child: const Center(
+//                         child: Text(
+//                           'VIEW PRODUCT',
+//                           style: TextStyle(
+//                               color: white,
+//                               fontSize: 13,
+//                               fontWeight: FontWeight.w600),
+//                         ),
+//                       ),
+//                     )),
+//               ],
+//             ))
+//       ],
+//     );
+//   }
+// }
+
+
+
+// CustomerDetails
+
+// // ignore_for_file: must_be_immutable
+// import 'package:flutter/material.dart';
+// import '../../../../core/colors.dart';
+
+// class CustomerDetails extends StatelessWidget {
+//   const CustomerDetails({
+//     super.key,
+//     required this.size,
+//   });
+
+//   final Size size;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: size.height * 0.25,
+//       width: size.width,
+//       color: light,
+//       child: ListView.builder(
+//         itemCount: 1,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (context, index) {
+//           return Padding(
+//             padding: EdgeInsets.only(top: size.height * 0.03),
+//             child: Row(
+//               children: [
+//                 IconButton(
+//                     onPressed: () {},
+//                     icon: const Icon(
+//                       Icons.arrow_back_ios_new_rounded,
+//                       size: 16,
+//                     )),
+//                 Column(
+//                   mainAxisAlignment: MainAxisAlignment.start,
+//                   crossAxisAlignment: CrossAxisAlignment.center,
+//                   children: [
+//                     Container(
+//                       height: size.height * 0.05,
+//                       width: size.width * 0.76,
+//                       decoration: BoxDecoration(
+//                           borderRadius: BorderRadius.circular(10)),
+//                       child: Padding(
+//                         padding: EdgeInsets.only(
+//                           left: size.width * 0.15,
+//                         ),
+//                         child: Row(
+//                           children: [
+//                             SizedBox(height: size.height * 0.01),
+//                             Container(
+//                               height: size.height * 0.05,
+//                               width: size.width * 0.11,
+//                               decoration: BoxDecoration(
+//                                   borderRadius: BorderRadius.circular(25),
+//                                   image: const DecorationImage(
+//                                       image: AssetImage(
+//                                           'assets/images/profile.jpg'),
+//                                       fit: BoxFit.cover)),
+//                             ),
+//                             SizedBox(width: size.width * 0.02),
+//                             Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 const Text(
+//                                   'Sheena Mittal',
+//                                   style: TextStyle(
+//                                       fontWeight: FontWeight.w500,
+//                                       fontSize: 14),
+//                                 ),
+//                                 Row(
+//                                   children: [
+//                                     SizedBox(width: size.width * 0.01),
+//                                     const Icon(Icons.star,
+//                                         color: primary, size: 17),
+//                                     SizedBox(width: size.width * 0.01),
+//                                     const Text('4  | '),
+//                                     SizedBox(width: size.width * 0.01),
+//                                     const Icon(
+//                                       Icons.verified,
+//                                       size: 17,
+//                                       color: Colors.blue,
+//                                     ),
+//                                     SizedBox(width: size.width * 0.01),
+//                                     const Text('Verified User',
+//                                         style: TextStyle(fontSize: 12))
+//                                   ],
+//                                 ),
+//                                 //   SizedBox(height: size.height*0.05),
+//                                 // Text('l')
+//                               ],
+//                             ),
+//                           ],
+//                         ),
+//                       ),
+//                     ),
+//                     SizedBox(height: size.height * 0.04),
+//                     Text(
+//                       '“I love the Platform very much as it gives \nus great opportunities and also exposure \nto all small business owners!”',
+//                       style:
+//                           TextStyle(fontWeight: FontWeight.w400, fontSize: 14),
+//                     )
+//                   ],
+//                 ),
+//                 IconButton(
+//                     onPressed: () {},
+//                     icon: const Icon(
+//                       Icons.arrow_forward_ios_rounded,
+//                       size: 16,
+//                     )),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+
+
+//CraftStoriesScreen
+
+
+// // ignore_for_file: must_be_immutable, sized_box_for_whitespace
+
+// import 'package:flutter/material.dart';
+// import '../../../../core/colors.dart';
+
+// class CraftStoriesScreen extends StatelessWidget {
+//   const CraftStoriesScreen({
+//     Key? key,
+//   }) : super(key: key);
+
+//   // List<Map<String, String>> popularItems = [
+//   //   {
+//   //     'popularImage': 'assets/images/work.jpg',
+//   //     'populatText': 'I MADE YOUR CLOTHE'
+//   //   },
+//   //   {
+//   //     'popularImage': 'assets/images/downloads.jpgg',
+//   //     'populatText': 'I MADE YOUR QUIL'
+//   //   }
+//   // ];
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+//     return Container(
+//       height: size.height * 0.25,
+//       width: size.width,
+//       child: ListView.builder(
+//         itemCount: 1,
+//         scrollDirection: Axis.horizontal,
+//         itemBuilder: (context, index) {
+//           return Padding(
+//             padding: const EdgeInsets.all(8.0),
+//             child: Row(
+//               crossAxisAlignment: CrossAxisAlignment.center,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 IconButton(
+//                   onPressed: () {},
+//                   icon: const Icon(
+//                     Icons.arrow_back_ios_new_rounded,
+//                     size: 16,
+//                   ),
+//                 ),
+//                 CraftStorieWidget(size: size),
+//                 SizedBox(width: size.width * 0.03),
+//                 CraftStorieWidget(size: size),
+//                 IconButton(
+//                   onPressed: () {},
+//                   icon: const Icon(
+//                     Icons.arrow_forward_ios_rounded,
+//                     size: 16,
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// class CraftStorieWidget extends StatelessWidget {
+//   const CraftStorieWidget({
+//     super.key,
+//     required this.size,
+//   });
+
+//   final Size size;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Stack(
+//       alignment: Alignment.center,
+//       children: [
+//         Container(
+//           height: size.height * 0.25,
+//           width: size.width * 0.54,
+//           decoration: BoxDecoration(
+//             color: lightgrey,
+//             borderRadius: BorderRadius.circular(10),
+//           ),
+//           child: Column(
+//             children: [
+//               Container(
+//                 height: size.height * 0.13,
+//                 width: size.width * 0.54,
+//                 decoration: const BoxDecoration(
+//                   borderRadius: BorderRadius.only(
+//                     topLeft: Radius.circular(10),
+//                     topRight: Radius.circular(10),
+//                   ),
+//                   image: DecorationImage(
+//                     image: AssetImage('assets/images/work.jpg'
+//                         // popularItems[index]['popularImage']!,
+//                         ),
+//                     fit: BoxFit.cover,
+//                   ),
+//                 ),
+//               ),
+//               SizedBox(height: size.height * 0.04),
+//               const Text(
+//                 'I MADE YOUR CLOTHE',
+//                 // popularItems[index]['populatText']!,
+//                 style: TextStyle(
+//                   fontWeight: FontWeight.w500,
+//                   fontSize: 16,
+//                 ),
+//               ),
+//               const Text(
+//                 'Read My Story',
+//                 style: TextStyle(
+//                   color: grey,
+//                   fontWeight: FontWeight.w400,
+//                 ),
+//               ),
+//             ],
+//           ),
+//         ),
+//         const CircleAvatar(
+//           radius: 45,
+//           backgroundImage: AssetImage(
+//             'assets/images/downloads.jpg',
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+
+
+
+
+///////home screen//////
+
+// import 'package:flutter/material.dart';
+// import 'package:platform_myhrakii/core/colors.dart';
+// import 'package:platform_myhrakii/src/views/home/widgets/bottamnavigation.dart';
+// import 'package:platform_myhrakii/src/views/home/widgets/carouselslider_screen.dart';
+// import 'package:platform_myhrakii/src/views/home/widgets/categoriesRow_screen.dart';
+// import 'package:platform_myhrakii/src/views/home/widgets/craftstories_screen.dart';
+// import 'package:platform_myhrakii/src/views/home/widgets/popularides_screen.dart';
+// import 'widgets/appbar.dart';
+// import 'widgets/craft_widget_screen.dart';
+// import 'widgets/customerdetails_screen.dart';
+// import 'widgets/arrivals_screen.dart';
+// import 'widgets/search_bar.dart';
+// import 'widgets/shopbycategory_screen.dart';
+
+// class HomeScreen extends StatelessWidget {
+//   const HomeScreen({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+//     return Scaffold(
+//       drawer: const Drawer(),
+//       appBar: appBarWidget(size, context),
+//       body: SingleChildScrollView(
+//         child: Column(
+//           children: [
+//             SearchBarWidget(size: size),
+//                CategoriesRow(),
+//             SizedBox(height: size.height * 0.03),
+//             const CarouselSliderDemo(),
+//             const SizedBox(height: 10),
+//             const Text(
+//               'NEW ARRIVALS',
+//               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22),
+//             ),
+//             SizedBox(height: size.height * 0.03),
+//              Row(
+//                children: [
+//                 // IconButton(
+//                 //   onPressed: () {},
+//                 //   icon: const Icon(
+//                 //     Icons.arrow_back_ios_new_rounded,
+//                 //     size: 16,
+//                 //   ),
+//                 // ),
+//                  FootwearRow(),
+//                 //   IconButton(
+//                 //   onPressed: () {},
+//                 //   icon: const Icon(
+//                 //     Icons.arrow_forward_ios_rounded,
+//                 //     size: 16,
+//                 //   ),
+//                 // ),
+//                ],
+//              ),
+//             SizedBox(height: size.height * 0.03),
+//             Container(
+//               height: size.height * 0.003,
+//               width: size.width * 0.3,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(10),
+//                   gradient: const LinearGradient(
+//                       colors: [primary, grey, grey, grey, grey],
+//                       begin: Alignment.centerLeft,
+//                       end: Alignment.centerRight),
+//                   color: primary),
+//             ),
+//             SizedBox(height: size.height * 0.02),
+//             TextButton(
+//                 onPressed: () {},
+//                 child: const Text(
+//                   'VIEW ALL',
+//                   style: TextStyle(
+//                     color: primary,
+//                     fontSize: 16,
+//                     fontWeight: FontWeight.w600,
+//                     decoration: TextDecoration.underline,
+//                     decorationColor: primaryy,
+//                     decorationThickness: 1,
+//                   ),
+//                 )),
+//             SizedBox(height: size.height * 0.03),
+//             CraftWidget(size: size),
+//             SizedBox(height: size.height * 0.03),
+//             const Text('POPULAR  GIFT  IDEAS',
+//                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
+//             PopularIdeasScreen(size: size),
+//             SizedBox(height: size.height * 0.03),
+//             Container(
+//               height: size.height * 0.003,
+//               width: size.width * 0.3,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(10),
+//                   gradient: const LinearGradient(
+//                       colors: [primary, grey, grey, grey, grey],
+//                       begin: Alignment.centerLeft,
+//                       end: Alignment.centerRight),
+//                   color: primary),
+//             ),
+//             SizedBox(height: size.height * 0.02),
+//             TextButton(
+//                 onPressed: () {},
+//                 child: const Text(
+//                   'VIEW ALL',
+//                   style: TextStyle(
+//                     color: primary,
+//                     fontSize: 16,
+//                     fontWeight: FontWeight.w600,
+//                     decoration: TextDecoration.underline,
+//                     decorationColor: primaryy,
+//                     decorationThickness: 1,
+//                   ),
+//                 )),
+//             SizedBox(height: size.height * 0.03),
+//             const Text('CUSTOMER REVIEWS',
+//                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
+//             SizedBox(height: size.height * 0.03),
+//             CustomerDetails(size: size),
+//             SizedBox(height: size.height * 0.03),
+//             const Text('SHOP BY CATEGORY',
+//                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
+//             SizedBox(height: size.height * 0.03),
+//             ShopByCategoryWidget(size: size),
+//             SizedBox(height: size.height * 0.03),
+//             Text(
+//               'LOAD MORE',
+//               style: TextStyle(
+//                   fontSize: 17,
+//                   fontWeight: FontWeight.w600,
+//                   decoration: TextDecoration.underline,
+//                   decorationColor: primaryy,
+//                   decorationThickness: 1,
+//                   foreground: Paint()
+//                     ..shader = const LinearGradient(colors: [primary, primaryy])
+//                         .createShader(
+//                             const Rect.fromLTWH(0.0, 0.0, 200.0, 70.0))),
+//             ),
+//             SizedBox(height: size.height * 0.03),
+//             const Text('MOST VIEWED',
+//                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
+//             SizedBox(height: size.height * 0.03),
+//              FootwearRow(),
+//             SizedBox(height: size.height * 0.03),
+//             Container(
+//               height: size.height * 0.003,
+//               width: size.width * 0.3,
+//               decoration: BoxDecoration(
+//                   borderRadius: BorderRadius.circular(10),
+//                   gradient: const LinearGradient(
+//                       colors: [primary, grey, grey, grey, grey],
+//                       begin: Alignment.centerLeft,
+//                       end: Alignment.centerRight),
+//                   color: primary),
+//             ),
+//             SizedBox(height: size.height * 0.02),
+//             TextButton(
+//                 onPressed: () {},
+//                 child: const Text(
+//                   'VIEW ALL',
+//                   style: TextStyle(
+//                     color: primary,
+//                     fontSize: 16,
+//                     fontWeight: FontWeight.w600,
+//                     decoration: TextDecoration.underline,
+//                     decorationColor: primaryy,
+//                     decorationThickness: 1,
+//                   ),
+//                 )),
+//             SizedBox(height: size.height * 0.03),
+//             const Text('CRAFT STORIES',
+//                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 22)),
+//             SizedBox(height: size.height * 0.03),
+//             const CraftStoriesScreen()
+//           ],
+//         ),
+//       ),
+//       bottomNavigationBar: const BottomNavigationBarWidget(),
+//     );
+//   }
+
+// }
+
+
+/// add to cart
+// import 'package:flutter/material.dart';
+// import '../../../core/colors.dart';
+// import 'widgets/addto_crat_tile.dart';
+// import 'widgets/appbar_screen.dart';
+
+// class AddtoCartScree extends StatelessWidget {
+//   const AddtoCartScree({
+//     super.key,
+//   });
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+//     return Scaffold(
+//       backgroundColor: white,
+//       drawer: const Drawer(),
+//       appBar: AppBarScreen(size, context),
+//       body: SingleChildScrollView(
+//         child: Padding(
+//           padding: const EdgeInsets.all(8.0),
+//           child: Column(
+//             children: [
+//               Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                 children: [
+//                   const Text('My Cart(3)',
+//                       style:
+//                           TextStyle(fontWeight: FontWeight.w400, fontSize: 19)),
+//                   TextButton(
+//                     onPressed: () {},
+//                     child: const Text(
+//                       'Clear All',
+//                       style: TextStyle(
+//                         color: primary,
+//                         fontSize: 16,
+//                         fontWeight: FontWeight.w600,
+//                         decoration: TextDecoration.underline,
+//                         decorationColor: primaryy,
+//                         decorationThickness: 1,
+//                       ),
+//                     ),
+//                   ),
+//                 ],
+//               ),
+//               SizedBox(height: size.height * 0.02),
+//               ListView.separated(
+//                 itemBuilder: (BuildContext context, int index){
+//                   return AddToCratTile(size: size);
+
+//                 },
+//                 separatorBuilder: (BuildContext context, int index){
+//                   return SizedBox(height: size.height*0.01);
+//                 },
+//                 itemCount: 3
+//                 ),
+//               // AddToCratTile(size: size),
+//               const Divider()
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+// tale carft screen
+
+// import 'package:flutter/material.dart';
+// import '../../../../core/colors.dart';
+// import 'package:get/get.dart';
+
+// class CraftController extends GetxController {
+//   final RxList<Map<String, String>> assetImages = [
+//     {
+//       'assetImages': 'assets/images/Rectangle 162262.png',
+//       'craftText': 'BLOCK PRINTED\nSCARFS',
+//       'subText': 'Block printing is the\nprocess of printing ....'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162261.png',
+//       'craftText': 'MIRROR WORK',
+//       'subText': 'Mirror-work,is a\ntype of embroidery which...'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162261 (1).png',
+//       'craftText': 'KOLHAPURI\nCHAPPALS',
+//       'subText': 'Kolhapuri chappals are \nIndian decorati...'
+//     },
+//     {
+//       'assetImages': 'assets/images/Rectangle 162262.png',
+//       'craftText': 'BLOCK PRINTED\nSCARFS',
+//       'subText': 'Block printing is the\nprocess of printing ....'
+//     },
+//   ].obs;
+// }
+
+// class CraftWidget extends StatelessWidget {
+//   final CraftController craftController = Get.put(CraftController());
+//  CraftWidget({super.key, required Size size});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+
+//     return Container(
+//       height: size.height * 0.68,
+//       width: size.width,
+//       color: light,
+//       child: Column(
+//         children: [
+//           SizedBox(height: size.height * 0.03),
+//           const Text(
+//             'TALE OF CRAFT',
+//             style: TextStyle(fontSize: 22, fontWeight: FontWeight.w500),
+//           ),
+//           Expanded(
+//             child: GridView.builder(
+//               physics: const NeverScrollableScrollPhysics(),
+//               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+//                 crossAxisCount: 2,
+//                 crossAxisSpacing: 0,
+//                 mainAxisSpacing: 7,
+//               ),
+//               itemCount: craftController.assetImages.length,
+//               itemBuilder: (context, index) {
+//                 var craft = craftController.assetImages[index];
+//                 return Container(
+//                   alignment: Alignment.centerLeft,
+//                   height: size.height,
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(10),
+//                     image: DecorationImage(
+//                       image: AssetImage(craft['assetImages']!),
+//                     ),
+//                   ),
+//                   child: Padding(
+//                     padding: EdgeInsets.only(
+//                       left: size.width * 0.07,
+//                       top: size.height * 0.09,
+//                     ),
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         Text(
+//                           craft['craftText']!,
+//                           style: const TextStyle(
+//                             color: white,
+//                             fontSize: 14,
+//                             fontWeight: FontWeight.w600,
+//                           ),
+//                         ),
+//                         SizedBox(height: size.height * 0.01),
+//                         Text(
+//                           craft['subText']!,
+//                           style: const TextStyle(
+//                             color: white,
+//                             fontSize: 12,
+//                             fontWeight: FontWeight.w400,
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 );
+//               },
+//             ),
+//           ),
+//           Container(
+//             height: size.height * 0.003,
+//             width: size.width * 0.3,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(10),
+//               gradient: const LinearGradient(
+//                 colors: [primary, grey, grey, grey, grey],
+//                 begin: Alignment.centerLeft,
+//                 end: Alignment.centerRight,
+//               ),
+//               color: primary,
+//             ),
+//           ),
+//           SizedBox(height: size.height * 0.02),
+//           TextButton(
+//             onPressed: () {},
+//             child: const Text(
+//               'VIEW ALL',
+//               style: TextStyle(
+//                 color: primary,
+//                 fontSize: 16,
+//                 fontWeight: FontWeight.w600,
+//                 decoration: TextDecoration.underline,
+//                 decorationColor: primary,
+//                 decorationThickness: 1,
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+
+
+//cotegory row in home screen
+
+// // categories_row.dart
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:platform_myhrakii/core/colors.dart';
+// import '../../../controller/category_controller.dart';
+
+// class CategoriesRow extends StatelessWidget {
+//   CategoriesRow({Key? key}) : super(key: key);
+
+//   final CategoriesController categoriesController =
+//       Get.put(CategoriesController());
+
+//   @override
+//   Widget build(BuildContext context) {
+//     var size = MediaQuery.of(context).size;
+
+//     return Container(
+//       margin: const EdgeInsets.only(top: 7),
+//       width: size.width,
+//       height: size.height * 0.14,
+//       child: Obx(
+//         () {
+//           if (categoriesController.isLoading.value) {
+//             // If data is still loading, show a circular progress indicator
+//             return Center(
+//               child: CircularProgressIndicator(),
+//             );
+//           }
+
+//           if (categoriesController.hasError.value) {
+//             // If there's an error, display an error message
+//             return Center(
+//               child: Text('Error loading categories'),
+//             );
+//           }
+
+//           // If the data is loaded successfully, build the widget tree
+//           return ListView.builder(
+//             scrollDirection: Axis.horizontal,
+//             physics: const BouncingScrollPhysics(),
+//             itemCount: categoriesController.categories.length,
+//             itemBuilder: (context, index) {
+//               var category = categoriesController.categories[index];
+//               var imageUrl = category['blobImageURL'] ?? 'default_image_path';
+
+//               return Padding(
+//                 padding: const EdgeInsets.all(10.0),
+//                 child: Column(
+//                   children: [
+//                     CircleAvatar(
+//                       radius: 43,
+//                       key: Key(imageUrl),
+//                       backgroundImage: NetworkImage(imageUrl),
+//                     ),
+//                     SizedBox(
+//                       height: size.height * 0.008,
+//                     ),
+//                     Flexible(
+//                       child: Text(
+//                         category['categoryName'] ?? '',
+//                         style: const TextStyle(
+//                           fontWeight: FontWeight.w500,
+//                           fontSize: 12,
+//                           color: primary,
+//                         ),
+//                         textAlign: TextAlign.center,
+//                         overflow: TextOverflow.visible,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               );
+//             },
+//           );
+//         },
+//       ),
+//     );
+//   }
+// }
