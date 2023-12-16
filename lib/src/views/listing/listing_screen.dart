@@ -65,7 +65,7 @@ class ListingScreen extends StatelessWidget {
                     );
                   }),
             ),
-            SizedBox(height: size.height * 0.01),
+            SizedBox(height: size.height * 0.02),
             Container(
               height: size.height * 0.2,
               width: size.width,
